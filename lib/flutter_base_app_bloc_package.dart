@@ -25,7 +25,7 @@ void _setContext(BuildContext context) {
   _mainAppContext = context;
 }
 
-class OperationPlugin {
+class GateWay {
   ///init app
   static Future _init() async {
     Bloc.observer = AppBlocObserver();
