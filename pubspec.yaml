@@ -10,6 +10,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.3
+  flutter_bloc: ^8.1.1
+  get_it: ^7.2.0
+  dio: ^4.0.6
+  dartz: ^0.10.1
+  curl_logger_dio_interceptor: ^0.0.3
+  intl: ^0.17.0
+  connectivity_plus: ^2.3.0
+  flutter_secure_storage: ^6.0.0
+  shared_preferences: ^2.0.15
+  flutter_svg: ^1.1.5
 
 dev_dependencies:
   flutter_test:
