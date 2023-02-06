@@ -1,0 +1,3 @@
+class TextConstant {
+  TextConstant._();
+}
