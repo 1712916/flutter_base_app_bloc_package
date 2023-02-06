@@ -17,21 +17,19 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends BasePageState<CounterPage, CounterCubit> {
-  late final CounterCubit _cubit;
   late final StreamSubscription _streamSubscription;
 
   @override
   void initState() {
     super.initState();
-    _cubit = GetIt.I.get()..init();
+    cubit.init();
     //NOTE: the first way handle by a separate stream
-    _streamSubscription = _cubit.eventController.listen(_handleEvent);
+    _streamSubscription = cubit.eventController.listen(_handleEvent);
   }
 
   @override
   void dispose() {
     _streamSubscription.cancel();
-    _cubit.dispose();
     super.dispose();
   }
 
@@ -104,7 +102,4 @@ class _CounterPageState extends BasePageState<CounterPage, CounterCubit> {
       ),
     );
   }
-
-  @override
-  CounterCubit get cubit => _cubit;
 }

@@ -4,11 +4,16 @@ import 'package:flutter_base_app_bloc_package/core/blocs/theme_cubit.dart';
 import 'package:flutter_base_app_bloc_package/core/ui_helpers/keyboard_helper.dart';
 import 'package:flutter_base_app_bloc_package/resources/index.dart';
 import 'package:flutter_base_app_bloc_package/resources/theme/text_themes.dart';
+import 'package:get_it/get_it.dart';
 
 abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends State<T> {
   static const String blocKey = 'bloc';
 
-  BasePageState();
+  BasePageState({
+    this.initCubitInsidePage = true
+});
+
+  final bool initCubitInsidePage;
 
   Color? get backGroundColor => null;
 
@@ -25,6 +30,16 @@ abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends 
   AppColors get colors => context.read<ThemeCubit>().colors;
 
   CustomTextTheme get textTheme => context.read<ThemeCubit>().textTheme;
+
+  @override
+  void initState() {
+    super.initState();
+    if (initCubitInsidePage) {
+      _cubit = GetIt.I.get();
+      ///don't need call _cubit.dispose() at dispose api
+      ///because it is called when Provider Widget call dispose
+    }
+  }
 
   @override
   void didChangeDependencies() {
