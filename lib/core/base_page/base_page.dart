@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_base_app_bloc_package/core/blocs/theme_cubit.dart';
 import 'package:flutter_base_app_bloc_package/core/ui_helpers/keyboard_helper.dart';
 import 'package:flutter_base_app_bloc_package/resources/index.dart';
 import 'package:flutter_base_app_bloc_package/resources/theme/text_themes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends State<T> {
   static const String blocKey = 'bloc';
 
-  BasePageState({
-    this.initCubitInsidePage = true
-});
+  BasePageState({this.autoInitCubit = true});
 
-  final bool initCubitInsidePage;
+  final bool autoInitCubit;
 
   Color? get backGroundColor => null;
 
@@ -34,8 +32,9 @@ abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends 
   @override
   void initState() {
     super.initState();
-    if (initCubitInsidePage) {
+    if (autoInitCubit) {
       _cubit = GetIt.I.get();
+
       ///don't need call _cubit.dispose() at dispose api
       ///because it is called when Provider Widget call dispose
     }
@@ -50,8 +49,8 @@ abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends 
     }
   }
 
-  void getPageSettings(Object? arguments){
-    if(arguments is Map && arguments[BasePageState.blocKey] != null) {
+  void getPageSettings(Object? arguments) {
+    if (arguments is Map && arguments[BasePageState.blocKey] != null) {
       if (arguments[BasePageState.blocKey] is C) {
         if (arguments[BasePageState.blocKey] != null) {
           _cubit = arguments[BasePageState.blocKey];
@@ -91,11 +90,11 @@ abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends 
         child: isBody
             ? buildContent()
             : Scaffold(
-          appBar: buildAppbar(),
-          body: buildContent(),
-          backgroundColor: backGroundColor,
-          floatingActionButton: buildFloatingActionButton(),
-        ),
+                appBar: buildAppbar(),
+                body: buildContent(),
+                backgroundColor: backGroundColor,
+                floatingActionButton: buildFloatingActionButton(),
+              ),
       );
     }
     return BlocProvider(
@@ -103,11 +102,11 @@ abstract class BasePageState<T extends StatefulWidget, C extends Cubit> extends 
       child: isBody
           ? buildContent()
           : Scaffold(
-        appBar: buildAppbar(),
-        body: buildContent(),
-        backgroundColor: backGroundColor,
-        floatingActionButton: buildFloatingActionButton(),
-      ),
+              appBar: buildAppbar(),
+              body: buildContent(),
+              backgroundColor: backGroundColor,
+              floatingActionButton: buildFloatingActionButton(),
+            ),
     );
   }
 }
