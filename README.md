@@ -1,39 +1,33 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+## Description
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This package provide a base project base:
+  - flutter_bloc (cubit): to management state 
+  - get_it: dependency injection
+  - dio: to connect http 
+  - curl_logger_dio_interceptor: log http request and response
+  - ...
 
-## Features
+I designed a base page and base bloc to save time, and easy to develop new feature when make project more expansive.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
 
-## Getting started
+## When you can use it?
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+In case: you want to seprate your project to more repository for easy manage source code, separate team, separate feature but all feature be launch in only a common app and it be deloyed to app store.
+
+Or:
+Clone this package and use `terminal flutter create .` to create android/ios project...so let code like normal way
 
 ## Usage
+add packge to pubspec.yaml
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+import 'package:flutter_base_app_bloc_package/flutter_base_app_bloc_package.dart';
 
 ```dart
-const like = 'sample';
+//call to open view
+GateWay.openApp(context, initRouteName: '/example'); //(1)
+
+//call to close (1)
+Navigator.of(mainAppContext!).pop();
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
